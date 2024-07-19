@@ -3,7 +3,7 @@ import os from 'node:os';
 
 import yaml from 'js-yaml';
 
-import configBuilder from "./utils/configBuilder"
+import configBuilder from './utils/configBuilder';
 
 const tasksIntegration = () => {
   let config;
@@ -18,10 +18,9 @@ const tasksIntegration = () => {
         // isRestart,
         logger,
         updateConfig,
-        addWatchFile
+        addWatchFile,
       }) => {
-
-        const buildLogger = logger.fork("astrowind");
+        const buildLogger = logger.fork('astrowind');
 
         const virtualModuleId = 'astrowind:config';
         const resolvedVirtualModuleId = '\0' + virtualModuleId;
@@ -63,16 +62,15 @@ const tasksIntegration = () => {
 
         addWatchFile(new URL('./src/config.yaml', config.root));
 
-        buildLogger.info("Astrowind `src/config.yaml` has been loaded.")
+        buildLogger.info('Astrowind `src/config.yaml` has been loaded.');
       },
       'astro:config:done': async ({ config: cfg }) => {
         config = cfg;
       },
 
       'astro:build:done': async ({ logger }) => {
-
-        const buildLogger = logger.fork("astrowind");
-        buildLogger.info("Updating `robots.txt` with `sitemap-index.xml` ...")
+        const buildLogger = logger.fork('astrowind');
+        buildLogger.info('Updating `robots.txt` with `sitemap-index.xml` ...');
 
         try {
           const outDir = config.outDir;
